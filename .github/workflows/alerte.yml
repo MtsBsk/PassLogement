@@ -2,7 +2,7 @@ name: Alerte Pass Logement
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Toutes les heures
+    - cron: '*/5 * * * *'  # Toutes les 5 minutes
   workflow_dispatch:
 
 jobs:
