@@ -25,7 +25,9 @@ logging.basicConfig(
 )
 
 # Charger les variables d'environnement
-load_dotenv()
+if os.getenv("GITHUB_ACTIONS") != "true":
+    load_dotenv()
+
 
 # URL et fichiers
 SITE_URL = 'https://offres.passlogement.com/account'
