@@ -1,4 +1,5 @@
 name: Alerte Pass Logement
+# Modification forcée pour activer le schedule
 
 on:
   schedule:
