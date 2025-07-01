@@ -220,7 +220,7 @@ def extract_offers_from_selenium(driver):
                         
                         # Vérifier que c'est une offre valide
                         if ville != "N/A" and type_logement != "N/A" and loyer != "N/A":
-                            offre = f"{ville} - {surface} - {loyer}"
+                            offre = f"{ville} - {departement} - {surface} - {loyer}"
                             logging.info(f"Offre détectée: {offre}")
                             offers.append(offre)
                     except Exception as e:
