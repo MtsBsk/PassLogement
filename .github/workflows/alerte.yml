@@ -9,6 +9,9 @@ jobs:
   alerte-job:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write  # Autorise les pushs dans le repo
+
     env:
       LOGIN_EMAIL: ${{ secrets.LOGIN_EMAIL }}
       LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
@@ -20,6 +23,8 @@ jobs:
     steps:
     - name: Cloner le dépôt
       uses: actions/checkout@v3
+      with:
+        persist-credentials: true
 
     - name: Installer Python
       uses: actions/setup-python@v4
@@ -34,3 +39,12 @@ jobs:
 
     - name: Exécuter le script
       run: python alertePassLogement.py
+
+    - name: Commit & Push des nouvelles offres
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git pull
+        git add old_offers.json
+        git diff --quiet && git diff --staged --quiet || git commit -m "Mise à jour automatique des offres"
+        git push
