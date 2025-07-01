@@ -31,7 +31,6 @@ jobs:
         pip install -r requirements.txt
         sudo apt-get update
         sudo apt-get install -y chromium-chromedriver
-        sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/chromedriver
 
     - name: Exécuter le script
       run: python alertePassLogement.py
