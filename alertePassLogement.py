@@ -160,10 +160,8 @@ def main():
     # NOTIFY
     if new_offers and TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID:
         msg = "🏠 *Nouvelles offres Pass Logement*\n\n"
-        msg += "\n".join(new_offers[:5])
+        msg += "\n".join(new_offers)
 
-        if len(new_offers) > 5:
-            msg += f"\n\n(+{len(new_offers) - 5} autres)"
 
         send_telegram_message(msg)
         logging.info("Notification Telegram envoyée")
