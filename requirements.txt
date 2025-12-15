@@ -1,5 +1,6 @@
 selenium
-beautifulsoup4
-twilio
-python-dotenv
 webdriver-manager
+python-dotenv
+beautifulsoup4
+requests
+python-telegram-bot
