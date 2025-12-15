@@ -52,6 +52,22 @@ def send_telegram_message(message: str):
     }
     requests.post(url, json=payload, timeout=10)
 
+
+def click_offers_tab(driver):
+    logging.info("Tentative de clic sur l’onglet 'Les offres'")
+
+    try:
+        tabs = driver.find_elements(By.XPATH, "//*[contains(text(),'Les offres')]")
+        if tabs:
+            driver.execute_script("arguments[0].click();", tabs[0])
+            time.sleep(3)
+            logging.info("Onglet 'Les offres' cliqué")
+            return True
+    except Exception as e:
+        logging.warning(f"Impossible de cliquer sur l’onglet : {e}")
+
+    return False
+
 # =========================
 # EXTRACTION OFFRES
 # =========================
@@ -69,12 +85,12 @@ def extract_offers(driver):
         for row in rows:
             cells = row.find_elements(By.TAG_NAME, "td")
 
-            if len(cells) >= 8:
-                ville = cells[3].text.strip()
-                departement = cells[2].text.strip()
-                type_logement = cells[4].text.strip()
-                surface = cells[5].text.strip()
-                loyer = cells[7].text.strip()
+            texts = [c.text.strip() for c in cells]
+
+            if any("€" in t for t in texts):
+                offer = " | ".join(texts)
+                offers.append(offer)
+
 
                 if ville and loyer:
                     offer = f"{ville} ({departement}) - {type_logement} - {surface} - {loyer}"
@@ -117,6 +133,7 @@ def main():
             )
             time.sleep(3)
 
+        click_offers_tab(driver)
         # EXTRACTION
         offers = extract_offers(driver)
         logging.info(f"{len(offers)} offres détectées")
