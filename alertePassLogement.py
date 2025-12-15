@@ -88,15 +88,20 @@ def extract_offers(driver):
 
             texts = [c.text.strip() for c in cells]
 
+            # Vérifier qu'il y a un loyer ou le symbole € pour filtrer les lignes pertinentes
             if any("€" in t for t in texts):
-                offer = " | ".join(texts)
+                # Extraire les informations principales avec fallback si la colonne est absente
+                partenaire = texts[0] if len(texts) > 0 else "N/A"
+                reference = texts[1] if len(texts) > 1 else "N/A"
+                departement = texts[2] if len(texts) > 2 else "N/A"
+                ville = texts[3] if len(texts) > 3 else "N/A"
+                type_logement = texts[4] if len(texts) > 4 else "N/A"
+                surface = texts[5] if len(texts) > 5 else "N/A"
+                loyer = texts[7] if len(texts) > 7 else "N/A"
+
+                # Créer le message formaté
+                offer = f"{ville} ({departement}) - {type_logement} - {surface} - {loyer}"
                 offers.append(offer)
-
-
-                #if ville and loyer:
-                 #   offer = f"{ville} ({departement}) - {type_logement} - {surface} - {loyer}"
-                  #  offers.append(offer)
-
     except TimeoutException:
         logging.warning("Aucune offre trouvée (timeout tableau)")
 
