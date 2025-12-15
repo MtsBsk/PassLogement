@@ -92,9 +92,9 @@ def extract_offers(driver):
                 offers.append(offer)
 
 
-                if ville and loyer:
-                    offer = f"{ville} ({departement}) - {type_logement} - {surface} - {loyer}"
-                    offers.append(offer)
+                #if ville and loyer:
+                 #   offer = f"{ville} ({departement}) - {type_logement} - {surface} - {loyer}"
+                  #  offers.append(offer)
 
     except TimeoutException:
         logging.warning("Aucune offre trouvée (timeout tableau)")
