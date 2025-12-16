@@ -9,6 +9,14 @@ jobs:
   scrape:
     runs-on: ubuntu-latest
 
+    # ÉTAPE 5 — éviter les exécutions concurrentes
+    concurrency:
+      group: pass-logement
+      cancel-in-progress: true
+
+    # ÉTAPE 8 — sécurité : timeout global du job
+    timeout-minutes: 10
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -32,8 +40,10 @@ jobs:
         run: |
           python alertePassLogement.py
 
+      # ÉTAPE 6 — commit robuste avec rebase
       - name: Commit updated offers
         run: |
+          git pull --rebase
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
           git add old_offers.json || true
