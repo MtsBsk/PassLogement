@@ -126,7 +126,7 @@ def main():
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--window-size=1920,1080")
-    chrome_options.add_argument("user-agent=PassLogementWatcher/1.0 (contact: LOGIN_EMAIL)")
+    chrome_options.add_argument("user-agent=PassLogementWatcher/1.0 (contact: https://github.com/MtsBsk/PassLogement)")
 
     
     driver = webdriver.Chrome(

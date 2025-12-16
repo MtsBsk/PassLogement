@@ -2,7 +2,7 @@ name: Pass Logement Scraper
 
 on:
   schedule:
-    - cron: "0 */2 * * *"   # toutes les 2 heures
+    - cron: "*/5 * * * *"   # toutes les 2 heures
   workflow_dispatch:       # lancement manuel possible
 
 jobs:
