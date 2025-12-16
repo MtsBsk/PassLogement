@@ -20,11 +20,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[
-        logging.FileHandler("passlogement.log", encoding="utf-8"),
-        logging.StreamHandler()
-    ]
+    handlers=[logging.StreamHandler()]
 )
+
 
 # =========================
 # ENV
@@ -60,6 +58,7 @@ def send_telegram_message(message: str):
     payload = {
         "chat_id": TELEGRAM_CHAT_ID,
         "text": message,
+        "parse_mode": "Markdown",
         "disable_notification": False
     }
     requests.post(url, json=payload, timeout=10)
