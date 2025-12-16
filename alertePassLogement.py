@@ -41,6 +41,17 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 SITE_URL = "https://offres.passlogement.com/account"
 OLD_OFFERS_FILE = "old_offers.json"
 
+REQUIRED_VARS = [
+    "LOGIN_EMAIL",
+    "LOGIN_PASSWORD",
+    "TELEGRAM_BOT_TOKEN",
+    "TELEGRAM_CHAT_ID",
+]
+
+missing = [v for v in REQUIRED_VARS if not os.getenv(v)]
+if missing:
+    raise RuntimeError(f"Missing env vars: {', '.join(missing)}")
+
 # =========================
 # TELEGRAM
 # =========================
