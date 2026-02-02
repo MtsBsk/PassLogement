@@ -5,14 +5,13 @@ on:
     - cron: "*/5 * * * *"   # toutes les 2 heures
   workflow_dispatch:       # lancement manuel possible
 
+concurrency:
+  group: pass-logement
+  cancel-in-progress: true
+      
 jobs:
   scrape:
     runs-on: ubuntu-latest
-
-    # ÉTAPE 5 — éviter les exécutions concurrentes
-    concurrency:
-      group: pass-logement
-      cancel-in-progress: true
 
     # ÉTAPE 8 — sécurité : timeout global du job
     timeout-minutes: 10
